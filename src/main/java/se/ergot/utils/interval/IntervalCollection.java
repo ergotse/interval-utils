@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class IntervalCollection<T extends Sequentiable<U>, U extends Comparable<U>> {
+public class IntervalCollection<T extends Sequentiable<U>, U> {
 
     private final List<T> items;
 
@@ -19,25 +19,18 @@ public class IntervalCollection<T extends Sequentiable<U>, U extends Comparable<
         return items.isEmpty();
     }
 
-    public U getFrom() {
-        return items.isEmpty() ? null : items.get(0).getValue();
-    }
-
-    public U getTo() {
-        return items.isEmpty() ? null : items.get(items.size() - 1).getValue();
-    }
-
-    public List<Interval<T, U>> getIntervals() {
-        final List<Interval<T, U>> list = new ArrayList<>();
-        T start = null;
-        T prev = null;
-        int i = 0;
-        for (T item : items) {
-            if (prev == null) {
-                start = item;
-                prev = item;
+    public List<Interval<T>> getIntervals() {
+        if (isEmpty()) {
+            return Collections.emptyList();
+        }
+        final List<Interval<T>> list = new ArrayList<>();
+        T start = items.get(0);
+        T prev = items.get(0);
+        for (int i = 0; i < items.size(); i++) {
+            final T item = items.get(i);
+            if (i > 0) {
+                prev = items.get(i - 1);
             }
-
             final long diff = prev.getDistance(item.getValue());
             if (diff > 1 && i == items.size() - 1) {
                 list.add(new Interval<>(start, prev));
@@ -48,21 +41,8 @@ public class IntervalCollection<T extends Sequentiable<U>, U extends Comparable<
                 list.add(new Interval<>(start, prev));
                 start = item;
             }
-
-            prev = item;
-            i++;
         }
+
         return list;
     }
-
-    @Override
-    public String toString() {
-        if (isEmpty()) {
-            return "";
-        } else if (getFrom().equals(getTo())) {
-            return getFrom().toString();
-        }
-        return getFrom() + "-" + getTo();
-    }
-
 }

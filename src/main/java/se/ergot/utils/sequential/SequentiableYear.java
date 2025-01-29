@@ -6,38 +6,38 @@ import java.time.Year;
 
 public class SequentiableYear implements Sequentiable<Year> {
 
-    private final Year year;
+    private final Year value;
 
-    private SequentiableYear(Year year) {
-        this.year = year;
+    private SequentiableYear(@NonNull Year value) {
+        this.value = value;
     }
 
-    public static SequentiableYear of(Year year) {
-        return new SequentiableYear(year);
+    public static SequentiableYear of(Year value) {
+        return new SequentiableYear(value);
     }
 
     @Override
     public Year getValue() {
-        return year;
+        return value;
     }
 
     @Override
     public Year getNext() {
-        return year.plusYears(1);
+        return value.plusYears(1);
     }
 
     @Override
     public Year getPrevious() {
-        return year.minusYears(1);
+        return value.minusYears(1);
     }
 
     @Override
     public long getDistance(@NonNull Year other) {
-        return Math.abs(year.getValue() - other.getValue());
+        return Math.abs(value.getValue() - other.getValue());
     }
 
     @Override
-    public boolean isLesserThan(@NonNull Year other) {
-        return year.isBefore(other);
+    public int compareTo(Sequentiable<Year> o) {
+        return Integer.compare(value.getValue(), o.getValue().getValue());
     }
 }

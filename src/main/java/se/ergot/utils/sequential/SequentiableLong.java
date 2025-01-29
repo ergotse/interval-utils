@@ -10,7 +10,7 @@ public class SequentiableLong implements Sequentiable<Long> {
         this.value = value;
     }
 
-    public static SequentiableLong of(@NonNull Long value) {
+    public static SequentiableLong of(long value) {
         return new SequentiableLong(value);
     }
 
@@ -35,7 +35,7 @@ public class SequentiableLong implements Sequentiable<Long> {
     }
 
     @Override
-    public boolean isLesserThan(@NonNull Long other) {
-        return value < other;
+    public int compareTo(Sequentiable<Long> o) {
+        return Long.compare(value, o.getValue());
     }
 }

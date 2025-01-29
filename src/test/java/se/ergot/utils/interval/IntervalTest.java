@@ -1,57 +1,62 @@
 package se.ergot.utils.interval;
 
 import org.junit.jupiter.api.Test;
-import se.ergot.utils.sequential.SequentiableDate;
 import se.ergot.utils.sequential.SequentiableInteger;
+import se.ergot.utils.sequential.SequentiableLong;
+import se.ergot.utils.sequential.SequentiableYear;
 
-import java.time.LocalDate;
+import java.time.Year;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class IntervalTest {
 
-    private final LocalDate first = LocalDate.of(2024, 1, 1);
-
-    private final LocalDate last = LocalDate.of(2024, 1, 2);
-
-    @Test
-    void testInterval_date() {
-        final Interval<SequentiableDate, LocalDate> interval = new Interval<>(SequentiableDate.of(first),
-                SequentiableDate.of(last));
-        assertEquals(first, interval.getStart().getValue());
-        assertEquals(last, interval.getEnd().getValue());
-        assertEquals("2024-01-01-2024-01-02", interval.toString());
-    }
-
-    @Test
-    void testInterval_date2() {
-        final Interval<SequentiableDate, LocalDate> interval = new Interval<>(first, last, SequentiableDate.class);
-        assertEquals(first, interval.getStart().getValue());
-        assertEquals(last, interval.getEnd().getValue());
-        assertEquals("2024-01-01-2024-01-02", interval.toString());
-    }
-
     @Test
     void testInterval_integer() {
-        final Interval<SequentiableInteger, Integer> interval = new Interval<>(SequentiableInteger.of(1), SequentiableInteger.of(2));
-        assertEquals(1, interval.getStart().getValue());
-        assertEquals(2, interval.getEnd().getValue());
-        assertEquals("1-2", interval.toString());
+        final int start = 1;
+        final int end = 20;
+        final Interval<SequentiableInteger> interval = new Interval<>(SequentiableInteger.of(start), SequentiableInteger.of(end));
+        assertEquals(start, interval.getStart().getValue());
+        assertEquals(end, interval.getEnd().getValue());
+        assertEquals("1-20", interval.toString());
     }
 
     @Test
-    void testIntervalBackwards() {
-        final Interval<SequentiableInteger, Integer> interval = new Interval<>(SequentiableInteger.of(2), SequentiableInteger.of(1));
-        assertEquals(1, interval.getStart().getValue());
-        assertEquals(2, interval.getEnd().getValue());
-        assertEquals("1-2", interval.toString());
+    void testInterval_long() {
+        final long start = 1L;
+        final long end = 20L;
+        final Interval<SequentiableLong> interval = new Interval<>(SequentiableLong.of(start), SequentiableLong.of(end));
+        assertEquals(start, interval.getStart().getValue());
+        assertEquals(end, interval.getEnd().getValue());
+        assertEquals("1-20", interval.toString());
     }
 
     @Test
-    void testIntervalSame() {
-        final Interval<SequentiableInteger, Integer> interval = new Interval<>(SequentiableInteger.of(1), SequentiableInteger.of(1));
-        assertEquals(1, interval.getStart().getValue());
-        assertEquals(1, interval.getEnd().getValue());
+    void testInterval_year() {
+        final Year start = Year.of(2016);
+        final Year end = Year.of(2022);
+        final Interval<SequentiableYear> interval = new Interval<>(SequentiableYear.of(start), SequentiableYear.of(end));
+        assertEquals(start, interval.getStart().getValue());
+        assertEquals(end, interval.getEnd().getValue());
+        assertEquals("2016-2022", interval.toString());
+    }
+
+    @Test
+    void testInterval_same() {
+        final long start = 1L;
+        final Interval<SequentiableLong> interval = new Interval<>(SequentiableLong.of(start), SequentiableLong.of(start));
+        assertEquals(start, interval.getStart().getValue());
+        assertEquals(start, interval.getEnd().getValue());
         assertEquals("1", interval.toString());
+    }
+
+    @Test
+    void testInterval_greaterToLesser() {
+        final long start = 1L;
+        final long end = 20L;
+        final Interval<SequentiableLong> interval = new Interval<>(SequentiableLong.of(end), SequentiableLong.of(start));
+        assertEquals(start, interval.getStart().getValue());
+        assertEquals(end, interval.getEnd().getValue());
+        assertEquals("1-20", interval.toString());
     }
 }

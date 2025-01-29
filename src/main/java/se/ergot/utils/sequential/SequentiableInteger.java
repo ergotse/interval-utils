@@ -10,7 +10,7 @@ public class SequentiableInteger implements Sequentiable<Integer> {
         this.value = value;
     }
 
-    public static SequentiableInteger of(@NonNull Integer value) {
+    public static SequentiableInteger of(int value) {
         return new SequentiableInteger(value);
     }
 
@@ -35,7 +35,7 @@ public class SequentiableInteger implements Sequentiable<Integer> {
     }
 
     @Override
-    public boolean isLesserThan(@NonNull Integer other) {
-        return value < other;
+    public int compareTo(Sequentiable<Integer> o) {
+        return Integer.compare(value, o.getValue());
     }
 }
