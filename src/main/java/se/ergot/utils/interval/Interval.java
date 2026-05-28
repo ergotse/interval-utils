@@ -1,10 +1,7 @@
 package se.ergot.utils.interval;
 
-import lombok.Getter;
-import lombok.NonNull;
 import se.ergot.utils.sequential.Sequentiable;
 
-@Getter
 public class Interval<T extends Sequentiable<?>> {
 
     private final T start;
@@ -12,7 +9,8 @@ public class Interval<T extends Sequentiable<?>> {
     private final T end;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public Interval(@NonNull T start, @NonNull T end) {
+    public Interval(T start, T end) {
+        if (start == null || end == null) throw new NullPointerException();
         if (((Sequentiable) start).compareTo(end) < 0) {
             this.start = start;
             this.end = end;
@@ -20,6 +18,14 @@ public class Interval<T extends Sequentiable<?>> {
             this.start = end;
             this.end = start;
         }
+    }
+
+    public T getStart() {
+        return start;
+    }
+
+    public T getEnd() {
+        return end;
     }
 
     @Override

@@ -1,14 +1,13 @@
 package se.ergot.utils.sequential;
 
-import lombok.NonNull;
-
 import java.time.Year;
 
 public class SequentiableYear implements Sequentiable<Year> {
 
     private final Year value;
 
-    private SequentiableYear(@NonNull Year value) {
+    private SequentiableYear(Year value) {
+        if (value == null) throw new NullPointerException();
         this.value = value;
     }
 
@@ -32,7 +31,7 @@ public class SequentiableYear implements Sequentiable<Year> {
     }
 
     @Override
-    public long getDistance(@NonNull Year other) {
+    public long getDistance(Year other) {
         return Math.abs(value.getValue() - other.getValue());
     }
 

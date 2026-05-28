@@ -3,9 +3,11 @@ package se.ergot.utils.interval;
 import org.junit.jupiter.api.Test;
 import se.ergot.utils.sequential.SequentiableInteger;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class IntervalCollectionTest {
 
@@ -25,6 +27,38 @@ class IntervalCollectionTest {
         assertEquals(2021, intervals.get(1).getEnd().getValue());
         assertEquals(2024, intervals.get(2).getStart().getValue());
         assertEquals(2024, intervals.get(2).getEnd().getValue());
+    }
+
+    @Test
+    void testGetIntervalsWhenEmpty() {
+        final IntervalCollection<SequentiableInteger, Integer> collection = new IntervalCollection<>(Collections.emptyList());
+        assertTrue(collection.isEmpty());
+        assertTrue(collection.getIntervals().isEmpty());
+    }
+
+    @Test
+    void testGetIntervalsWhenSingleItem() {
+        final IntervalCollection<SequentiableInteger, Integer> collection = new IntervalCollection<>(List.of(
+                SequentiableInteger.of(2024)
+        ));
+        final List<Interval<SequentiableInteger>> intervals = collection.getIntervals();
+        assertEquals(1, intervals.size());
+        assertEquals(2024, intervals.get(0).getStart().getValue());
+        assertEquals(2024, intervals.get(0).getEnd().getValue());
+    }
+
+    @Test
+    void testGetIntervalsWhenAllConsecutive() {
+        final IntervalCollection<SequentiableInteger, Integer> collection = new IntervalCollection<>(List.of(
+                SequentiableInteger.of(2018),
+                SequentiableInteger.of(2016),
+                SequentiableInteger.of(2019),
+                SequentiableInteger.of(2017)
+        ));
+        final List<Interval<SequentiableInteger>> intervals = collection.getIntervals();
+        assertEquals(1, intervals.size());
+        assertEquals(2016, intervals.get(0).getStart().getValue());
+        assertEquals(2019, intervals.get(0).getEnd().getValue());
     }
 
     @Test

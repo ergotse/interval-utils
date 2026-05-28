@@ -1,7 +1,5 @@
 package se.ergot.utils.sequential;
 
-import lombok.NonNull;
-
 public interface Sequentiable<T> extends Comparable<Sequentiable<T>> {
 
     T getValue();
@@ -10,7 +8,7 @@ public interface Sequentiable<T> extends Comparable<Sequentiable<T>> {
 
     T getPrevious();
 
-    long getDistance(@NonNull T other);
+    long getDistance(T other);
 
     int compareTo(Sequentiable<T> o);
 }

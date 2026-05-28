@@ -1,12 +1,11 @@
 package se.ergot.utils.sequential;
 
-import lombok.NonNull;
-
 public class SequentiableLong implements Sequentiable<Long> {
 
     private final Long value;
 
-    private SequentiableLong(@NonNull Long value) {
+    private SequentiableLong(Long value) {
+        if (value == null) throw new NullPointerException();
         this.value = value;
     }
 
@@ -30,7 +29,7 @@ public class SequentiableLong implements Sequentiable<Long> {
     }
 
     @Override
-    public long getDistance(@NonNull Long other) {
+    public long getDistance(Long other) {
         return Math.abs(value - other);
     }
 
