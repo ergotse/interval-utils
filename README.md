@@ -3,7 +3,7 @@
 ## Objective
 `interval-utils` compresses a collection of discrete, orderable values into the smallest set of contiguous ranges. Given the years `2024, 2021, 2020, 2018, 2016, 2017`, it produces the intervals `2016-2018`, `2020-2021`, `2024`.
 
-It works with any type that implements the `Sequentiable<T>` interface, not just numbers - built-in support is provided for `Integer`, `Long`, and `java.time.Year`.
+It works with any type that implements the `Sequentiable<T>` interface, not just numbers - built-in support is provided for `Integer`, `Long`, `java.time.Year`, and `java.time.LocalDate`.
 
 ## Installation
 To include `interval-utils` in your project, add the following Maven dependency:
@@ -58,11 +58,12 @@ Built-in implementations:
 
 | Type               | Wraps          |
 |--------------------|----------------|
-| `SequentiableInteger` | `Integer`   |
-| `SequentiableLong`    | `Long`      |
-| `SequentiableYear`    | `java.time.Year` |
+| `SequentiableInteger`   | `Integer`          |
+| `SequentiableLong`      | `Long`             |
+| `SequentiableYear`      | `java.time.Year`   |
+| `SequentiableLocalDate` | `java.time.LocalDate` |
 
-Each is created via a static `of(...)` factory, e.g. `SequentiableInteger.of(5)`. To support another type (e.g. `LocalDate`), implement `Sequentiable<LocalDate>` following the same pattern.
+Each is created via a static `of(...)` factory, e.g. `SequentiableInteger.of(5)`. To support another type (e.g. `YearMonth`), implement `Sequentiable<YearMonth>` following the same pattern.
 
 ## License
 Licensed under the [Apache License, Version 2.0](LICENSE).
