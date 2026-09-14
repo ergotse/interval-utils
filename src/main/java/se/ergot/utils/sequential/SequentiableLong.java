@@ -1,7 +1,9 @@
 package se.ergot.utils.sequential;
 
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
+@EqualsAndHashCode
 public class SequentiableLong implements Sequentiable<Long> {
 
     private final Long value;
@@ -31,7 +33,7 @@ public class SequentiableLong implements Sequentiable<Long> {
 
     @Override
     public long getDistance(@NonNull Long other) {
-        return Math.abs(value - other);
+        return Math.absExact(Math.subtractExact(value, other));
     }
 
     @Override

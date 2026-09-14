@@ -6,8 +6,15 @@ import se.ergot.utils.sequential.SequentiableInteger;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class IntervalCollectionTest {
+
+    @Test
+    void testOf_nullItems() {
+        // A null collection must be rejected explicitly rather than silently treated as empty.
+        assertThrows(NullPointerException.class, () -> IntervalCollection.of(null));
+    }
 
     @Test
     void testGetIntervalsWhenInteger() {

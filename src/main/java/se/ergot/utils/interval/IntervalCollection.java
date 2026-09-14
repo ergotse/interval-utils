@@ -1,5 +1,6 @@
 package se.ergot.utils.interval;
 
+import lombok.NonNull;
 import se.ergot.utils.sequential.Sequentiable;
 
 import java.util.ArrayList;
@@ -11,11 +12,11 @@ public class IntervalCollection<T extends Sequentiable<U>, U> {
 
     private final List<T> items;
 
-    private IntervalCollection(Collection<T> items) {
-        this.items = items != null ? items.stream().distinct().sorted().toList() : Collections.emptyList();
+    private IntervalCollection(@NonNull Collection<T> items) {
+        this.items = items.stream().distinct().sorted().toList();
     }
 
-    public static <T extends Sequentiable<U>, U> IntervalCollection<T, U> of(Collection<T> items) {
+    public static <T extends Sequentiable<U>, U> IntervalCollection<T, U> of(@NonNull Collection<T> items) {
         return new IntervalCollection<>(items);
     }
 

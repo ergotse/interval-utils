@@ -1,9 +1,11 @@
 package se.ergot.utils.sequential;
 
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
 import java.time.Year;
 
+@EqualsAndHashCode
 public class SequentiableYear implements Sequentiable<Year> {
 
     private final Year value;
