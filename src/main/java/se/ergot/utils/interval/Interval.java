@@ -12,7 +12,7 @@ public class Interval<T extends Sequentiable<?>> {
     private final T end;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public Interval(@NonNull T start, @NonNull T end) {
+    private Interval(@NonNull T start, @NonNull T end) {
         if (((Sequentiable) start).compareTo(end) < 0) {
             this.start = start;
             this.end = end;
@@ -20,6 +20,10 @@ public class Interval<T extends Sequentiable<?>> {
             this.start = end;
             this.end = start;
         }
+    }
+
+    public static <T extends Sequentiable<?>> Interval<T> of(@NonNull T start, @NonNull T end) {
+        return new Interval<>(start, end);
     }
 
     @Override

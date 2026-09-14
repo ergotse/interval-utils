@@ -11,7 +11,7 @@ class IntervalCollectionTest {
 
     @Test
     void testGetIntervalsWhenInteger() {
-        final IntervalCollection<SequentiableInteger, Integer> collection = new IntervalCollection<>(List.of(
+        final IntervalCollection<SequentiableInteger, Integer> collection = IntervalCollection.of(List.of(
                 SequentiableInteger.of(2024),
                 SequentiableInteger.of(2021), SequentiableInteger.of(2020),
                 SequentiableInteger.of(2018), SequentiableInteger.of(2016), SequentiableInteger.of(2017)
@@ -29,7 +29,7 @@ class IntervalCollectionTest {
 
     @Test
     void testGetIntervalsWhenInteger_duplicateValues() {
-        final IntervalCollection<SequentiableInteger, Integer> collection = new IntervalCollection<>(List.of(
+        final IntervalCollection<SequentiableInteger, Integer> collection = IntervalCollection.of(List.of(
                 SequentiableInteger.of(2024),
                 SequentiableInteger.of(2021), SequentiableInteger.of(2020), SequentiableInteger.of(2016),
                 SequentiableInteger.of(2018), SequentiableInteger.of(2016), SequentiableInteger.of(2017)

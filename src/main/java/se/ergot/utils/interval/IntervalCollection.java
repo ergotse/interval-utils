@@ -11,8 +11,12 @@ public class IntervalCollection<T extends Sequentiable<U>, U> {
 
     private final List<T> items;
 
-    public IntervalCollection(Collection<T> items) {
+    private IntervalCollection(Collection<T> items) {
         this.items = items != null ? items.stream().distinct().sorted().toList() : Collections.emptyList();
+    }
+
+    public static <T extends Sequentiable<U>, U> IntervalCollection<T, U> of(Collection<T> items) {
+        return new IntervalCollection<>(items);
     }
 
     public boolean isEmpty() {
@@ -33,12 +37,12 @@ public class IntervalCollection<T extends Sequentiable<U>, U> {
             }
             final long diff = prev.getDistance(item.getValue());
             if (diff > 1 && i == items.size() - 1) {
-                list.add(new Interval<>(start, prev));
-                list.add(new Interval<>(item, item));
+                list.add(Interval.of(start, prev));
+                list.add(Interval.of(item, item));
             } else if (i == items.size() - 1) {
-                list.add(new Interval<>(start, item));
+                list.add(Interval.of(start, item));
             } else if (diff > 1) {
-                list.add(new Interval<>(start, prev));
+                list.add(Interval.of(start, prev));
                 start = item;
             }
         }

@@ -15,7 +15,7 @@ class IntervalTest {
     void testInterval_integer() {
         final int start = 1;
         final int end = 20;
-        final Interval<SequentiableInteger> interval = new Interval<>(SequentiableInteger.of(start), SequentiableInteger.of(end));
+        final Interval<SequentiableInteger> interval = Interval.of(SequentiableInteger.of(start), SequentiableInteger.of(end));
         assertEquals(start, interval.getStart().getValue());
         assertEquals(end, interval.getEnd().getValue());
         assertEquals("1-20", interval.toString());
@@ -25,7 +25,7 @@ class IntervalTest {
     void testInterval_long() {
         final long start = 1L;
         final long end = 20L;
-        final Interval<SequentiableLong> interval = new Interval<>(SequentiableLong.of(start), SequentiableLong.of(end));
+        final Interval<SequentiableLong> interval = Interval.of(SequentiableLong.of(start), SequentiableLong.of(end));
         assertEquals(start, interval.getStart().getValue());
         assertEquals(end, interval.getEnd().getValue());
         assertEquals("1-20", interval.toString());
@@ -35,7 +35,7 @@ class IntervalTest {
     void testInterval_year() {
         final Year start = Year.of(2016);
         final Year end = Year.of(2022);
-        final Interval<SequentiableYear> interval = new Interval<>(SequentiableYear.of(start), SequentiableYear.of(end));
+        final Interval<SequentiableYear> interval = Interval.of(SequentiableYear.of(start), SequentiableYear.of(end));
         assertEquals(start, interval.getStart().getValue());
         assertEquals(end, interval.getEnd().getValue());
         assertEquals("2016-2022", interval.toString());
@@ -44,7 +44,7 @@ class IntervalTest {
     @Test
     void testInterval_same() {
         final long start = 1L;
-        final Interval<SequentiableLong> interval = new Interval<>(SequentiableLong.of(start), SequentiableLong.of(start));
+        final Interval<SequentiableLong> interval = Interval.of(SequentiableLong.of(start), SequentiableLong.of(start));
         assertEquals(start, interval.getStart().getValue());
         assertEquals(start, interval.getEnd().getValue());
         assertEquals("1", interval.toString());
@@ -54,7 +54,7 @@ class IntervalTest {
     void testInterval_greaterToLesser() {
         final long start = 1L;
         final long end = 20L;
-        final Interval<SequentiableLong> interval = new Interval<>(SequentiableLong.of(end), SequentiableLong.of(start));
+        final Interval<SequentiableLong> interval = Interval.of(SequentiableLong.of(end), SequentiableLong.of(start));
         assertEquals(start, interval.getStart().getValue());
         assertEquals(end, interval.getEnd().getValue());
         assertEquals("1-20", interval.toString());

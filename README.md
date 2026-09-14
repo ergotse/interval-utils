@@ -17,7 +17,7 @@ To include `interval-utils` in your project, add the following Maven dependency:
 ## Usage
 ```java
 // Creating an Interval
-final Interval<SequentiableInteger> interval = new Interval<>(SequentiableInteger.of(1), SequentiableInteger.of(20));
+final Interval<SequentiableInteger> interval = Interval.of(SequentiableInteger.of(1), SequentiableInteger.of(20));
 final Integer start = interval.getStart().getValue(); 
 final Integer end = interval.getEnd().getValue();
 System.out.println(interval.toString());  // 1-20
@@ -25,7 +25,7 @@ System.out.println(interval.toString());  // 1-20
 
 ```java
 // Using IntervalCollection
-final IntervalCollection<SequentiableInteger, Integer> collection = new IntervalCollection<>(Set.of(
+final IntervalCollection<SequentiableInteger, Integer> collection = IntervalCollection.of(Set.of(
         SequentiableInteger.of(2024),
         SequentiableInteger.of(2021),
         SequentiableInteger.of(2020),
